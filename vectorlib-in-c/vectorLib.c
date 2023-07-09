@@ -318,7 +318,8 @@ int vector_create_ramp(struct Vector *vector,int init_index,float slope)
 //returns -1 if fails
 int vector_create_cos(struct Vector *vector,int init_index, int period)
 {
-
+    float p = (float)period;
+    int i;
     //guard to check init_index range
     if(init_index > vector->len)
     {
@@ -343,9 +344,8 @@ int vector_create_cos(struct Vector *vector,int init_index, int period)
         printf("ERROR @vector_create_cos: Frequency cannot be greater than vector lenght. Aborting\n");
     }
 
-    float p = (float)period;
     //loop for numerical processing
-    int i;
+
     for( i = 0 ; i < vector->len ; i++)
     {
         if( i >= init_index)
@@ -671,6 +671,7 @@ int vector_mult_const(struct Vector *vector, float gain)
     return 0;
 }
 
+//#todo: need to test this function
 int vector_distance(struct Vector *src1,struct Vector *src2,float *result)
 {
 
@@ -698,4 +699,24 @@ int vector_distance(struct Vector *src1,struct Vector *src2,float *result)
     //assings to result pointer
     *result = y;
     return 0; 
+}
+
+//#todo: need to test this function
+int vector_norm(struct Vector *vector,float *result)
+{
+    int i;
+    float y = 0.0;
+    int length = vector->len;
+
+    //loop for processing
+    for(i = 0 ; i < length ; i++)
+    {
+        y += *(vector->array+i) * *(vector->array+i); 
+    }
+
+
+    *result = sqrt(y);
+
+    return 0;
+
 }
