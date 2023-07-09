@@ -60,10 +60,11 @@ int vector_div(struct Vector *src1,struct Vector *src2,struct Vector *res);
 int vector_pow(struct Vector *src,struct Vector *dest,float power);
 
 //linear algebra operations
-//#modifications -- need to test these functions!
+//#todo: neeed to verify inner product
 int vector_inner_product(struct Vector *src1, struct Vector *src2, float *result);
 int vector_sum(struct Vector *vector, float *result);
 int vector_energy(struct Vector *vector, float *result);
 int vector_mult_const(struct Vector *vector, float gain);
+int vector_distance(struct Vector *src1,struct Vector *src2,float *result);
 //int vector_conv(struct Vector *src1, struct Vector *src2, struct Vector *result);
 #endif

@@ -598,6 +598,12 @@ int vector_pow(struct Vector *src,struct Vector *dest,float power)
 //computes the inner product of two real vectors v1 and v2
 int vector_inner_product(struct Vector *src1, struct Vector *src2, float *result)
 {
+
+    int i,length;
+    float y;
+    y = 0.0;
+    length = src1->len;
+
     //guards
     //guard for length 
     if(src1->len != src2->len)
@@ -607,11 +613,6 @@ int vector_inner_product(struct Vector *src1, struct Vector *src2, float *result
     }
 
     //loop for numerical processing
-    int i,length;
-    float y;
-    y = 0.0;
-    length = src1->len;
-
     //#todo: Algorithm is not working for some orthogonal frequencies.
     //algorithm is showing negative result even for orthogonal frequencis. must fix
     for (i = 0 ; i < length ; i++)
@@ -619,7 +620,9 @@ int vector_inner_product(struct Vector *src1, struct Vector *src2, float *result
         y += *(src1->array+i) * *(src2->array+i);
     }
     //external float pointer receives the result of y
-    *result = y;
+    //returns absolute value only because of float computations
+    //might lead to small negative numbers when vectors are orthogonal
+    *result = abs(y);
     return 0;
 }
 
@@ -666,4 +669,33 @@ int vector_mult_const(struct Vector *vector, float gain)
     }
 
     return 0;
+}
+
+int vector_distance(struct Vector *src1,struct Vector *src2,float *result)
+{
+
+    int i,length;
+    float y;
+    y = 0.0;
+    length = src1->len;
+
+    //guards
+    //guard for length 
+    if(src1->len != src2->len)
+    {
+        printf("ERROR @vector_norm: Source vectors have different lengths.\n");
+        return -1;
+    }
+
+    //loop for processing integrak{|src1-src2|^2}
+    for(i = 0 ; i < length ; i++)
+    {
+        y += pow((*(src1->array+i) - *(src2->array+i)) , 2);
+    }
+
+    y = sqrt(y); //computes square root
+    
+    //assings to result pointer
+    *result = y;
+    return 0; 
 }
