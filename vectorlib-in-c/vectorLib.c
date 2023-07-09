@@ -607,12 +607,16 @@ int vector_inner_product(struct Vector *src1, struct Vector *src2, float *result
     }
 
     //loop for numerical processing
-    int i;
+    int i,length;
     float y;
     y = 0.0;
-    for (i = 0 ; i < src1->len ; i++)
+    length = src1->len;
+
+    //#todo: Algorithm is not working for some orthogonal frequencies.
+    //algorithm is showing negative result even for orthogonal frequencis. must fix
+    for (i = 0 ; i < length ; i++)
     {
-        y = y + *(src1->array+i) * *(src2->array+i);
+        y += *(src1->array+i) * *(src2->array+i);
     }
     //external float pointer receives the result of y
     *result = y;

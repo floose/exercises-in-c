@@ -2,7 +2,7 @@
 #define _VECTORLIBH
 
 //defines a guard for memory allocations of arrays
-#define MAX_SAMPLES 100000
+#define MAX_SAMPLES 1000000
 //defines a guard for maximum printable information of array
 #define MAX_PRINTABLE_LEN 50
 #define PI 3.14159265359
