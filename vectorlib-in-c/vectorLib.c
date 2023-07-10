@@ -672,6 +672,7 @@ int vector_mult_const(struct Vector *vector, float gain)
 }
 
 //#todo: need to test this function
+
 int vector_distance(struct Vector *src1,struct Vector *src2,float *result)
 {
 
@@ -711,12 +712,38 @@ int vector_norm(struct Vector *vector,float *result)
     //loop for processing
     for(i = 0 ; i < length ; i++)
     {
-        y += vector->array[i] * vector->array[i];
+        y += *(vector->array+i) * *(vector->array+i); 
     }
 
 
     *result = sqrt(y);
 
     return 0;
+
+}
+
+int vector_moving_avg(struct Vector *input, struct Vector *output, float alfa)
+{
+    int i;
+    int length = input->len;
+    float y = 0.0;
+    float y_past = 0.0;
+
+    //guards
+    //guard for length 
+    if(input->len != output->len)
+    {
+        printf("ERROR @vector_moving_avg: Source vectors have different lengths.\n");
+        return -1;
+    }
+
+    //loop for procesisng
+    for(i = 0 ; i < length ; i++)
+    {
+        y = alfa*(input->array[i]) + (1-alfa)*y_past; //filter equation
+        y_past = y; //stores past calculated value
+        output->array[i] = y; //updates output
+    }
+
 
 }
