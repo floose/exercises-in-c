@@ -711,7 +711,7 @@ int vector_norm(struct Vector *vector,float *result)
     //loop for processing
     for(i = 0 ; i < length ; i++)
     {
-        y += *(vector->array+i) * *(vector->array+i); 
+        y += vector->array[i] * vector->array[i];
     }
 
 

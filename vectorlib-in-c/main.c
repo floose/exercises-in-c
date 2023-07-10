@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     vector_print_samples(y,100);
     //computes inner product
 
-    vector_inner_product(y,x,&result);
+    vector_inner_product(x,x,&result);
     printf("Calculated Inner Product: %f\n",result);
 
     //computes distance
