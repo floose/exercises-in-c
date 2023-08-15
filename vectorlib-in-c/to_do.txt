@@ -1,0 +1,8 @@
+To do List of vector operations:
+	[ ] Inner product - verify
+	[ ] Implement discrete convolution
+	[ ] Implement auto correlation
+	[ ] Implement FFT algorithm 
+
+General tasks:
+	[ ] Implement better error handler structure
