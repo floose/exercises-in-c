@@ -6,3 +6,5 @@ To do List of vector operations:
 
 General tasks:
 	[ ] Implement better error handler structure
+	[ ] Implement command line parser + MVC structure (C++?)
+	[ ] Implement a data-base to access vectors and manipulators (workspace?)
