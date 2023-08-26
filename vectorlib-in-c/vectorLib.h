@@ -22,20 +22,10 @@ struct Vector
     int len;
 };
 
-/*
-//#modifications (under construction!)
-//struct for 2-dimensional vector 
-struct Complex_Vector
-{
-    struct Vector v_real;
-    struct Vector v_imag;
-    int len;
-    char *name;
-};
-*/
 
 //data handling functions for struct Vector
 struct Vector *vector_create(char *name, int len);
+struct Vector *vector_create_complex(char *name, int len); //#todo needs coding!
 int vector_copy_array(struct Vector *src,struct Vector *dest);
 void vector_destroy(struct Vector *vector);
 void vector_print_info(struct Vector *vector);

@@ -1,8 +1,12 @@
 To do List of vector operations:
 	[ ] Inner product - verify
+	[ ] Implement complex vector representation
 	[ ] Implement discrete convolution
 	[ ] Implement auto correlation
 	[ ] Implement FFT algorithm 
+	[ ] Compute polynomial interpolation (polnynomial regression)
+	[ ] Compute power series differentiation and integration
+	
 
 General tasks:
 	[ ] Implement better error handler structure

@@ -744,6 +744,7 @@ int vector_moving_avg(struct Vector *input, struct Vector *output, float alfa)
         y_past = y; //stores past calculated value
         output->array[i] = y; //updates output
     }
+    
     return 0;
 
 }
