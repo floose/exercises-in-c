@@ -36,16 +36,16 @@ void Array<T>::Display()
 {
 
     for (int i = 0; i < Length; i++)
-        [cout << A[i] << " ";
+        {cout << A[i] << " ";
             cout << endl;
-        ]
+        }
 }
 
 template <class T>
 void Array<T>::Insert(int index, T value)
 {
     // guards for size
-    if (index >= 0 && index <= Lenght)
+    if (index >= 0 && index <= Length)
     {
         // shifts everyone to create space
         for (int i = Length - 1; i >= index; i--)
