@@ -38,8 +38,14 @@ float Avg(struct Array arr);
 void Reverse(struct Array *arr);
 int IsSorted(struct Array arr);
 void InsertSorted(struct Array *arr, int value); //#todo verify this
+
 //Binary functions that need more than one array
-int Merge(struct Array *arr1, struct Array *arr2,struct Array *output); //#todo needs to add guards to this
+int Merge(struct Array *arr1, struct Array *arr2,struct Array *output); 
+int Union(struct Array *arr1, struct Array *arr2,struct Array *output); 
+int Intersection(struct Array *arr1, struct Array *arr2,struct Array *output); 
+int Difference(struct Array *arr1, struct Array *arr2,struct Array *output); 
+
+
 
 //
 // MAIN FUNCTION
@@ -47,10 +53,10 @@ int Merge(struct Array *arr1, struct Array *arr2,struct Array *output); //#todo 
 int main()
 {
 	struct Array arr1 = {{2,6,10,15,25},10,5};
-	struct Array arr2 = {{3,4,7,18,20},10,5};
+	struct Array arr2 = {{3,6,7,15,20},10,5};
 	struct Array arr3 = {{0},10,10};
 
-	Merge(&arr1,&arr2,&arr3);
+	Difference(&arr1,&arr2,&arr3);
 	Display(arr3);
 	return 0;
 }
@@ -270,6 +276,102 @@ int Merge(struct Array *arr1, struct Array *arr2,struct Array *output)
 		output->A[k++] = arr1->A[i];
 	for(;j<arr2->length;j++)
 		output->A[k++] = arr2->A[j];
+
+	return SUCCESS;
+} 
+
+int Union(struct Array *arr1, struct Array *arr2,struct Array *output)
+{
+	int i,j,k;
+	i = 0; j = 0; k = 0;
+
+	//check if sizes are ok
+	if(output->size > (arr1->size + arr2->size))
+	{
+		return FAIL;
+	}
+
+	//one starts at head, other at tail
+	while(i < arr1->length && j < arr2->length)
+	{
+		if(arr1->A[i] < arr2->A[j])
+			output->A[k++] = arr1->A[i++];
+		else if(arr2->A[j] < arr1->A[i] )
+			output->A[k++] = arr2->A[j++];
+		else
+		{
+			output->A[k++] = arr1->A[i++];
+			j++;
+		}
+;
+	}
+	//copy remaining elements
+	for(;i<arr1->length;i++)
+		output->A[k++] = arr1->A[i];
+	for(;j<arr2->length;j++)
+		output->A[k++] = arr2->A[j];
+
+	return SUCCESS;
+} 
+
+int Intersection(struct Array *arr1, struct Array *arr2,struct Array *output)
+{
+	int i,j,k;
+	i = 0; j = 0; k = 0;
+
+	//check if sizes are ok
+	if(output->size > (arr1->size + arr2->size))
+	{
+		return FAIL;
+	}
+
+	//one starts at head, other at tail
+	while(i < arr1->length && j < arr2->length)
+	{
+		if(arr1->A[i] < arr2->A[j])
+			i++; //if they are not equal, just move to next
+		else if(arr2->A[j] < arr1->A[i] )
+			j++; //same, if they are not equal, move and dont copy it
+		else
+		{
+			output->A[k++] = arr1->A[i++];
+			j++;
+		}
+	}
+
+
+	return SUCCESS;
+} 
+
+int Difference(struct Array *arr1, struct Array *arr2,struct Array *output)
+{
+	int i,j,k;
+	i = 0; j = 0; k = 0;
+
+	//check if sizes are ok
+	if(output->size > (arr1->size + arr2->size))
+	{
+		return FAIL;
+	}
+
+	//one starts at head, other at tail
+	while(i < arr1->length && j < arr2->length)
+	{
+		//only the elements different on the first array are copied
+		if(arr1->A[i] < arr2->A[j])
+			output->A[k++] = arr1->A[i++];
+		else if(arr2->A[j] < arr1->A[i] )
+			j++;
+		else //if both equal, skip elements
+		{
+			i++;
+			j++;
+		}
+;
+	}
+	//copy remaining elements
+	for(;i<arr1->length;i++)
+		output->A[k++] = arr1->A[i];
 
 	return SUCCESS;
 } 
