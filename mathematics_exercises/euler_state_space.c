@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+/*
+This program applies the Euler method to solve a 2nd order state-space equation.
+The system is a series RLC circuit submitted to a step function.
+The output is a text file containing the waveforms of the state of the system
+*/
+
 //struct to save the states of the euler's method iteration
 struct States
 {
