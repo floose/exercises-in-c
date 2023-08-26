@@ -2,8 +2,10 @@
 #include <stdlib.h>
 
 //Flags to check for return
+//#todo verify the guards... maybe on a struct sounds better
 #define FAIL -1
 #define SUCCESS 1
+#define FALSE 0
 
 // Template to some array of abstract data structure (ADT)
 
@@ -12,7 +14,7 @@
 //
 struct Array
 {
-	int A[20]; // fixed size for now, memory on the stack
+	int A[10]; // fixed size for now, memory on the stack
 	int size;
 	int length;
 };
@@ -34,15 +36,22 @@ int Min(struct Array arr);
 int Sum(struct Array arr);
 float Avg(struct Array arr);
 void Reverse(struct Array *arr);
+int IsSorted(struct Array arr);
+void InsertSorted(struct Array *arr, int value); //#todo verify this
+//Binary functions that need more than one array
+int Merge(struct Array *arr1, struct Array *arr2,struct Array *output); //#todo needs to add guards to this
 
 //
 // MAIN FUNCTION
 //
 int main()
 {
-	struct Array arr1 = {{2,3,9,16,18,21,28,32,35},10,9};
-	Reverse(&arr1);
-	Display(arr1);
+	struct Array arr1 = {{2,6,10,15,25},10,5};
+	struct Array arr2 = {{3,4,7,18,20},10,5};
+	struct Array arr3 = {{0},10,10};
+
+	Merge(&arr1,&arr2,&arr3);
+	Display(arr3);
 	return 0;
 }
 
@@ -104,7 +113,7 @@ int Delete(struct Array *arr, int index)
 		arr->length--; //decrements length
 		return value; //returns value
 	}
-	return 0; //if guards fail, returns 0
+	return FAIL; //if guards fail, returns -1
 }
 
 //returns the position of an element
@@ -212,3 +221,55 @@ void Reverse(struct Array *arr)
 		_swap(&arr->A[i],&arr->A[j]);
 	}
 }
+
+void InsertSorted(struct Array *arr, int value)
+{
+	int i = arr->length-1;
+	
+	while(arr->A[i]>value)
+	{
+		arr->A[i+1] = arr->A[i]; //shifts everyone to accumulatte
+		i--;
+	}
+	arr->A[i+1] = value; //inserts value at sorted position
+}
+
+int IsSorted(struct Array arr)
+{
+	int i;
+	for(i=0 ; i < arr.length-1 ; i++)
+	{
+		//check if everything is sorted
+		if(arr.A[i] > arr.A[i+1])
+			return FALSE;
+	}
+	return SUCCESS;
+}
+
+int Merge(struct Array *arr1, struct Array *arr2,struct Array *output)
+{
+	int i,j,k;
+	i = 0; j = 0; k = 0;
+
+	//check if sizes are ok
+	if(output->size > (arr1->size + arr2->size))
+	{
+		return FAIL;
+	}
+
+	//one starts at head, other at tail
+	while(i < arr1->length && j < arr2->length)
+	{
+		if(arr1->A[i] < arr2->A[j])
+			output->A[k++] = arr1->A[i++];
+		else
+			output->A[k++] = arr2->A[j++];
+	}
+	//copy remaining elements
+	for(;i<arr1->length;i++)
+		output->A[k++] = arr1->A[i];
+	for(;j<arr2->length;j++)
+		output->A[k++] = arr2->A[j];
+
+	return SUCCESS;
+} 
