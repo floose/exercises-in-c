@@ -1,14 +1,15 @@
 To do List of vector operations:
-	[ ] Inner product - verify
-	[ ] Implement complex vector representation
+	[x] Inner product - verify
 	[ ] Implement discrete convolution
+	[ ] Implement complex vector representation
 	[ ] Implement auto correlation
 	[ ] Implement FFT algorithm 
 	[ ] Compute polynomial interpolation (polnynomial regression)
 	[ ] Compute power series differentiation and integration
 	
 
-General tasks:
+General/Future tasks:
 	[ ] Implement better error handler structure
 	[ ] Implement command line parser + MVC structure (C++?)
 	[ ] Implement a data-base to access vectors and manipulators (workspace?)
+	[ ] Implement a GUI engine to plot graphs
