@@ -451,9 +451,9 @@ int vector_create_exp(struct Vector *vector, int init_index, float expoent)
 int vector_copy_array(struct Vector *src,struct Vector *dest)
 {
     //guard to check if they have the same length
-    if(src->len != dest->len)
+    if(dest->len < src->len)
     {
-        printf("ERROR @vector_copy_array: Vectors have different lengths.\n");
+        printf("ERROR @vector_copy_array: Destionation vector length is less than source vector. Aborting\n");
         return -1;
     }
 
