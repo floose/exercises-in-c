@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1693221699 source:/home/felipe/Documentos/Code Blocks Projects/teste/main.cpp
+	<iostream>
+	"ArrayInt.h"
+
+1693221931 /home/felipe/Documentos/Code Blocks Projects/teste/include/ArrayInt.h
+
+1693224350 source:/home/felipe/Documentos/Code_Blocks_Projects/teste/main.cpp
+	<iostream>
+	"ArrayInt.h"
+
+1693225248 /home/felipe/Documentos/Code_Blocks_Projects/teste/include/ArrayInt.h
+
+1693223997 source:/home/felipe/Documentos/Code_Blocks_Projects/teste/src/ArrayInt.cpp
+	"ArrayInt.h"
+	<iostream>
+
+1693324536 source:/home/felipe/Documentos/Code_Blocks_Projects/Array_Int/src/ArrayInt.cpp
+	"ArrayInt.h"
+	<iostream>
+
+1693321210 /home/felipe/Documentos/Code_Blocks_Projects/Array_Int/include/ArrayInt.h
+
+1693322262 source:/home/felipe/Documentos/Code_Blocks_Projects/Array_Int/main.cpp
+	<iostream>
+	"ArrayInt.h"
+

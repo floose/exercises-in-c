@@ -14,7 +14,7 @@
 //
 struct Array
 {
-	int A[10]; // fixed size for now, memory on the stack
+	int A[20]; // fixed size for now, memory on the stack
 	int size;
 	int length;
 };
@@ -52,11 +52,11 @@ int Difference(struct Array *arr1, struct Array *arr2,struct Array *output);
 //
 int main()
 {
-	struct Array arr1 = {{2,6,10,15,25},10,5};
-	struct Array arr2 = {{3,6,7,15,20},10,5};
-	struct Array arr3 = {{0},10,10};
+	struct Array arr1 = {{2,6,10,15,25},20,5};
+	struct Array arr2 = {{3,6,7,15,20},20,5};
+	struct Array arr3 = {{0},20,10};
 
-	Difference(&arr1,&arr2,&arr3);
+	Merge(&arr1,&arr2,&arr3);
 	Display(arr3);
 	return 0;
 }
@@ -258,25 +258,33 @@ int Merge(struct Array *arr1, struct Array *arr2,struct Array *output)
 	i = 0; j = 0; k = 0;
 
 	//check if sizes are ok
-	if(output->size > (arr1->size + arr2->size))
+	
+	if(output->size < (arr1->length + arr2->length))
 	{
 		return FAIL;
 	}
-
-	//one starts at head, other at tail
+	
 	while(i < arr1->length && j < arr2->length)
 	{
 		if(arr1->A[i] < arr2->A[j])
-			output->A[k++] = arr1->A[i++];
+		{
+			output->A[k] = arr1->A[i];
+			k++; i++;
+		}
+
 		else
-			output->A[k++] = arr2->A[j++];
+		{
+			output->A[k] = arr2->A[j];
+			k++; j++;
+		}
+
 	}
 	//copy remaining elements
-	for(;i<arr1->length;i++)
+	for(;i<arr1->length;i++)	
 		output->A[k++] = arr1->A[i];
 	for(;j<arr2->length;j++)
 		output->A[k++] = arr2->A[j];
-
+	output->length=arr1->length+arr2->length;
 	return SUCCESS;
 } 
 
@@ -303,7 +311,7 @@ int Union(struct Array *arr1, struct Array *arr2,struct Array *output)
 			output->A[k++] = arr1->A[i++];
 			j++;
 		}
-;
+
 	}
 	//copy remaining elements
 	for(;i<arr1->length;i++)
