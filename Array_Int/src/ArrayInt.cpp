@@ -308,3 +308,40 @@ ArrayInt ArrayInt::Inter(const ArrayInt &arr1, const ArrayInt &arr2)
     return arr3;
 }
 
+ArrayInt ArrayInt::Diff(const ArrayInt &arr1, const ArrayInt &arr2)
+{
+    int i,j,k;
+    i=j=k=0;
+    int arr1Len = arr1.Len;
+    int arr2Len = arr2.Len;
+    ArrayInt arr3(arr1Len + arr2Len);
+
+    while(i < arr1Len && j < arr2Len)
+    {
+
+        //only the elements different on the first array are copied
+        if(arr1.A[i] < arr2.A[j])
+        {
+            arr3.A[k++] = arr1.A[i++];
+        }
+        else if(arr2.A[j] < arr1.A[i])
+        {
+            j++;
+        }
+        else
+        {
+            //if equal, just skip
+            i++;
+            j++;
+        }
+        //copy remaining elements
+    }
+
+    //Copy remaining elements
+    for(; i < arr1Len ; i++)
+    {
+        arr3.A[k++] = arr1.A[i];
+    }
+    arr3.Len = k;
+    return arr3;
+}
