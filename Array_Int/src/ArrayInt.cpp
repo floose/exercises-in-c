@@ -211,33 +211,100 @@ void ArrayInt::Rearrange()
     }
 }
 
-    ArrayInt ArrayInt::Merge(const ArrayInt &arr1, const ArrayInt &arr2)
-    {
-        int i,j,k;
-        i=j=k=0;
-        int arr1Len = arr1.Len;
-        int arr2Len = arr2.Len;
-        ArrayInt arr3(arr1Len + arr2Len);
+ArrayInt ArrayInt::Merge(const ArrayInt &arr1, const ArrayInt &arr2)
+{
+    int i,j,k;
+    i=j=k=0;
+    int arr1Len = arr1.Len;
+    int arr2Len = arr2.Len;
+    ArrayInt arr3(arr1Len + arr2Len);
 
-        while(i < arr1Len && j < arr2Len)
+    while(i < arr1Len && j < arr2Len)
+    {
+        //takes the smaller and merges into the position
+        //test also with append later
+        if(arr1.A[i] < arr2.A[j])
         {
-            //takes the smaller and merges into the position
-            //test also with append later
-            if(arr1.A[i] < arr2.A[j])
-            {
-                arr3.A[k++] = arr1.A[i++];
-            }
-            else
-            {
-                arr3.A[k++] = arr2.A[j++];
-            }
-            //copy remaining elements
+            arr3.A[k++] = arr1.A[i++];
         }
-        for(; i < arr1Len ; i++)
-            arr3.A[k++] = arr1.A[i];
-        for(; j < arr2Len ; j++)
-            arr3.A[k++] = arr2.A[j];
-        arr3.Len = arr1Len + arr2Len;
-        return arr3;
+        else
+        {
+            arr3.A[k++] = arr2.A[j++];
+        }
+        //copy remaining elements
     }
+    for(; i < arr1Len ; i++)
+        arr3.A[k++] = arr1.A[i];
+    for(; j < arr2Len ; j++)
+        arr3.A[k++] = arr2.A[j];
+    arr3.Len = arr1Len + arr2Len;
+    return arr3;
+}
+
+ArrayInt ArrayInt::Union(const ArrayInt &arr1, const ArrayInt &arr2)
+{
+    int i,j,k;
+    i=j=k=0;
+    int arr1Len = arr1.Len;
+    int arr2Len = arr2.Len;
+    ArrayInt arr3(arr1Len + arr2Len);
+
+    while(i < arr1Len && j < arr2Len)
+    {
+        //takes the smaller and merges into the position
+        //test also with append later
+        if(arr1.A[i] < arr2.A[j])
+        {
+            arr3.A[k++] = arr1.A[i++];
+        }
+        else if(arr2.A[j] < arr1.A[i])
+        {
+            arr3.A[k++] = arr1.A[j++];
+        }
+        else
+        {
+            arr3.A[k++] = arr2.A[i++];
+            j++;
+        }
+        //copy remaining elements
+    }
+    for(; i < arr1Len ; i++)
+        arr3.A[k++] = arr1.A[i];
+    for(; j < arr2Len ; j++)
+        arr3.A[k++] = arr2.A[j];
+    arr3.Len = k;
+    return arr3;
+}
+
+ArrayInt ArrayInt::Inter(const ArrayInt &arr1, const ArrayInt &arr2)
+{
+    int i,j,k;
+    i=j=k=0;
+    int arr1Len = arr1.Len;
+    int arr2Len = arr2.Len;
+    ArrayInt arr3(arr1Len + arr2Len);
+
+    while(i < arr1Len && j < arr2Len)
+    {
+        //takes the smaller and merges into the position
+        //test also with append later
+        if(arr1.A[i] < arr2.A[j])
+        {
+            i++; //if not equal, just move to next
+        }
+        else if(arr2.A[j] < arr1.A[i])
+        {
+            j++; //same than the other
+        }
+        else
+        {
+            //if equal, copy to output
+            arr3.A[k++] = arr2.A[i++];
+            j++;
+        }
+        //copy remaining elements
+    }
+    arr3.Len = k;
+    return arr3;
+}
 

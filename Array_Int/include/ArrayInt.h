@@ -61,10 +61,12 @@ public:
     bool IsSorted();
     void Rearrange();
     static ArrayInt Merge(const ArrayInt &arr1, const ArrayInt &arr2);
-    //ArrayInt Union(ArrayInt B);
-    //ArrayInt Intersection(ArrayInt B);
+    static ArrayInt Union(const ArrayInt &arr1, const ArrayInt &arr2);
+    static ArrayInt Inter(const ArrayInt &arr1, const ArrayInt &arr2);
+    static ArrayInt Diff(const ArrayInt &arr1, const ArrayInt &arr2);
     void InsertSorted(int value);
 
 };
 
 #endif // ARRAYINT_H
+
