@@ -58,5 +58,5 @@ int vector_mult_const(struct Vector *vector, float gain);
 int vector_distance(struct Vector *src1,struct Vector *src2,float *result);
 int vector_norm(struct Vector *vector,float *result);
 int vector_moving_avg(struct Vector *input, struct Vector *output, float alfa);
-//int vector_conv(struct Vector *src1, struct Vector *src2, struct Vector *result);
+int vector_conv(struct Vector *src1, struct Vector *src2, struct Vector *result);
 #endif
