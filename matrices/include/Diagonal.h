@@ -14,10 +14,13 @@ class Diagonal
 private:
     float *A; //array
     int N; //number of diagonal elements
+    TypeofMatrix Type;
+
 public:
     Diagonal(int n,TypeofMatrix flag);
     ~Diagonal();
-    //void Create();
+    void Create();
+    void Create(float *arr);
     //int Get(int i, int j);
     //void Set(int i, int j, int x);
     //void Display();

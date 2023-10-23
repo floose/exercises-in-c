@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Diagonal.h"
 
 using namespace std;
 
